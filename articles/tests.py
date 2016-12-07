@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.test import TestCase
 
 from .models import Article
@@ -11,7 +13,12 @@ class TestArticle(TestCase):
     """
 
     def setUp(self):
-        self.article = Article.objects.create(title='test', author='admin')
+        self.date = datetime.utcnow()
+        self.article = Article.objects.create(
+            title='test',
+            author='admin',
+            publication_date=self.date
+        )
 
     def test_article_sets_title(self):
         self.assertEqual(self.article.title, 'test')
@@ -20,7 +27,7 @@ class TestArticle(TestCase):
         self.assertEqual(self.article.author, 'admin')
 
     def test_article_sets_publication_date(self):
-        self.assertEqual(self.article.publication_date, '')
+        self.assertEqual(self.article.publication_date, self.date)
 
     def test_article_sets_category(self):
         self.assertEqual(self.article.category, '')
