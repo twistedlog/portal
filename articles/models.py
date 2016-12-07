@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 
+from .utils import get_upload_location
 # Create your models here.
 
 
@@ -25,8 +26,8 @@ class Article(models.Model):
     publication_date = models.DateTimeField()
     body = models.TextField()
     category = models.ForeignKey(Category)
-    hero_image = models.ImageField()
-    optional_image = models.ImageField(blank=True)
+    hero_image = models.ImageField(upload_to=get_upload_location)
+    optional_image = models.ImageField(blank=True, upload_to=get_upload_location)
 
     def __str__(self):
         return u'Title: {0}, Author: {1}'.format(self.title, self.author)
