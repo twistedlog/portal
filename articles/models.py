@@ -11,6 +11,10 @@ class Category(models.Model):
     def __str__(self):
         return u'Name: {0}'.format(self.name)
 
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Categories'
+
 
 class Article(models.Model):
     """
@@ -26,3 +30,7 @@ class Article(models.Model):
 
     def __str__(self):
         return u'Title: {0}, Author: {1}'.format(self.title, self.author)
+
+    class Meta:
+        ordering = ['publication_date']
+        verbose_name_plural = 'Articles'
