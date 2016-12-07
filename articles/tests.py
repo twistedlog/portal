@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.test import TestCase
 
-from .models import Article
+from .models import Article, Category
 
 # Create your tests here.
 
@@ -42,4 +42,16 @@ class TestArticle(TestCase):
 
     def test_article_sets_optional_image(self):
         #TODO filgure out how to test ImageField
+        pass
+
+
+class TestCategory(TestCase):
+
+    def setUp(self):
+        self.category = Category.objects.create(name='fiction')
+
+    def test_category_sets_name(self):
+        self.assertEqual(self.category.name, 'fiction')
+
+    def test_category_name_is_uique(self):
         pass
