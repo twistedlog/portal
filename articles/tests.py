@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db import transaction
 from django.db.utils import IntegrityError
 from django.test import TestCase
 
@@ -50,14 +51,25 @@ class TestArticle(TestCase):
         self.assertEqual(self.article.optional_image, ' ')
 
     def test_article_title_is_unique(self):
-        with self.assertRaises(IntegrityError) as e:
-            Article.objects.create(
-                title='test',
-                author='admin1',
-                publication_date=datetime.utcnow(),
-                body='some text',
-                category=self.category)
-        self.assertTrue('UNIQUE constraint failed:' in str(e.exception))
+        # Note:
+        # http://stackoverflow.com/questions/21458387/transactionmanagementerror-you-cant-execute-queries-until-the-end-of-the-atom
+        try:
+            with transaction.atomic():
+                article = Article.objects.create(
+                    title='test',
+                    author='admin1',
+                    publication_date=datetime.utcnow(),
+                    body='some text',
+                    category=self.category)
+        except IntegrityError as e:
+            self.assertTrue('UNIQUE constraint failed:' in str(e))
+        else:
+            article.delete()
+            self.fail('Title field not unique')
+
+    def tearDown(self):
+        self.article.delete()
+        self.category.delete()
 
 
 class TestCategory(TestCase):
@@ -69,6 +81,14 @@ class TestCategory(TestCase):
         self.assertEqual(self.category.name, 'fiction')
 
     def test_category_name_is_unique(self):
-        with self.assertRaises(IntegrityError) as e:
-            Category.objects.create(name='fiction')
-        self.assertTrue('UNIQUE constraint failed:' in str(e.exception))
+        try:
+            with transaction.atomic():
+                category = Category.objects.create(name='fiction')
+        except IntegrityError as e:
+            self.assertTrue('UNIQUE constraint failed:' in str(e))
+        else:
+            category.delete()
+            self.fail('Name field not unique')
+
+    def tearDown(self):
+        self.category.delete()
