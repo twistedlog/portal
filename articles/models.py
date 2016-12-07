@@ -6,4 +6,7 @@ from django.db import models
 
 
 class Article(models.Model):
-    pass
+    """
+    Model representing article
+    """
+    title = models.CharField(max_length=250)
