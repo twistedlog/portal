@@ -10,3 +10,4 @@ class Article(models.Model):
     Model representing article
     """
     title = models.CharField(max_length=250)
+    author = models.CharField(max_length=100)
