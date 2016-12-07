@@ -9,7 +9,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
-        return u'Category: {0}'.format(self.name)
+        return u'Name: {0}'.format(self.name)
 
 
 class Article(models.Model):
@@ -25,4 +25,4 @@ class Article(models.Model):
     optional_image = models.ImageField()
 
     def __str__(self):
-        return u'Title: {0}, Author:{1}'.format(self.title, self.author)
+        return u'Title: {0}, Author: {1}'.format(self.title, self.author)

@@ -67,6 +67,9 @@ class TestArticle(TestCase):
             article.delete()
             self.fail('Title field not unique')
 
+    def test_article_str_represenation(self):
+        self.assertEqual(str(self.article), 'Title: test, Author: admin')
+
     def tearDown(self):
         self.article.delete()
         self.category.delete()
@@ -89,6 +92,9 @@ class TestCategory(TestCase):
         else:
             category.delete()
             self.fail('Name field not unique')
+
+    def test_category_str_representation(self):
+        self.assertEqual(str(self.category), 'Name: fiction')
 
     def tearDown(self):
         self.category.delete()
