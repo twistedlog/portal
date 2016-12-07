@@ -40,12 +40,14 @@ class TestArticle(TestCase):
         self.assertEqual(self.article.body, 'sample test')
 
     def test_article_sets_hero_image(self):
-        #TODO filgure out how to test ImageField
-        pass
+        # TODO figure out how to test ImageField
+        # let the tests fail for now
+        self.assertEqual(self.article.hero_image, '')
 
     def test_article_sets_optional_image(self):
-        #TODO filgure out how to test ImageField
-        pass
+        # TODO figure out how to test ImageField
+        # let the tests fail for now
+        self.assertEqual(self.article.optional_image, '')
 
 
 class TestCategory(TestCase):
