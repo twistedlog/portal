@@ -17,7 +17,8 @@ class TestArticle(TestCase):
         self.article = Article.objects.create(
             title='test',
             author='admin',
-            publication_date=self.date
+            publication_date=self.date,
+            body='sample test'
         )
 
     def test_article_sets_title(self):
@@ -33,7 +34,7 @@ class TestArticle(TestCase):
         self.assertEqual(self.article.category, '')
 
     def test_article_sets_body(self):
-        self.assertEqual(self.article.body, '')
+        self.assertEqual(self.article.body, 'sample test')
 
     def test_article_sets_hero_image(self):
         #TODO filgure out how to test ImageField

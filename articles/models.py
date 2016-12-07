@@ -12,3 +12,4 @@ class Article(models.Model):
     title = models.CharField(max_length=250)
     author = models.CharField(max_length=100)
     publication_date = models.DateTimeField()
+    body = models.TextField()
