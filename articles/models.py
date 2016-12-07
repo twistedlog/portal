@@ -19,3 +19,4 @@ class Article(models.Model):
     body = models.TextField()
     category = models.ForeignKey(Category)
     hero_image = models.ImageField()
+    optional_image = models.ImageField()
