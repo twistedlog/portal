@@ -26,7 +26,7 @@ class Article(models.Model):
     body = models.TextField()
     category = models.ForeignKey(Category)
     hero_image = models.ImageField()
-    optional_image = models.ImageField()
+    optional_image = models.ImageField(blank=True)
 
     def __str__(self):
         return u'Title: {0}, Author: {1}'.format(self.title, self.author)
