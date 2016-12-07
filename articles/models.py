@@ -13,7 +13,7 @@ class Article(models.Model):
     """
     Model representing article
     """
-    title = models.CharField(max_length=250)
+    title = models.CharField(max_length=250, unique=True)
     author = models.CharField(max_length=100)
     publication_date = models.DateTimeField()
     body = models.TextField()
