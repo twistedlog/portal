@@ -5,6 +5,10 @@ from django.db import models
 # Create your models here.
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+
 class Article(models.Model):
     """
     Model representing article
@@ -13,7 +17,4 @@ class Article(models.Model):
     author = models.CharField(max_length=100)
     publication_date = models.DateTimeField()
     body = models.TextField()
-
-
-class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    category = models.ForeignKey(Category)

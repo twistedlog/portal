@@ -15,11 +15,13 @@ class TestArticle(TestCase):
 
     def setUp(self):
         self.date = datetime.utcnow()
+        self.category = Category.objects.create(name='fiction')
         self.article = Article.objects.create(
             title='test',
             author='admin',
             publication_date=self.date,
-            body='sample test'
+            body='sample test',
+            category=self.category
         )
 
     def test_article_sets_title(self):
@@ -32,7 +34,7 @@ class TestArticle(TestCase):
         self.assertEqual(self.article.publication_date, self.date)
 
     def test_article_sets_category(self):
-        self.assertEqual(self.article.category, '')
+        self.assertEqual(self.article.category, self.category)
 
     def test_article_sets_body(self):
         self.assertEqual(self.article.body, 'sample test')
