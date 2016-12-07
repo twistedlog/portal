@@ -18,3 +18,4 @@ class Article(models.Model):
     publication_date = models.DateTimeField()
     body = models.TextField()
     category = models.ForeignKey(Category)
+    hero_image = models.ImageField()
