@@ -49,6 +49,16 @@ class TestArticle(TestCase):
         # let the tests fail for now
         self.assertEqual(self.article.optional_image, ' ')
 
+    def test_article_title_is_unique(self):
+        with self.assertRaises(IntegrityError) as e:
+            Article.objects.create(
+                title='test',
+                author='admin1',
+                publication_date=datetime.utcnow(),
+                body='some text',
+                category=self.category)
+        self.assertTrue('UNIQUE constraint failed:' in str(e.exception))
+
 
 class TestCategory(TestCase):
 
@@ -58,7 +68,7 @@ class TestCategory(TestCase):
     def test_category_sets_name(self):
         self.assertEqual(self.category.name, 'fiction')
 
-    def test_category_name_is_uique(self):
+    def test_category_name_is_unique(self):
         with self.assertRaises(IntegrityError) as e:
             Category.objects.create(name='fiction')
         self.assertTrue('UNIQUE constraint failed:' in str(e.exception))
