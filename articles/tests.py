@@ -2,7 +2,8 @@ from datetime import datetime
 
 from django.db import transaction
 from django.db.utils import IntegrityError
-from django.test import TestCase
+from django.test import Client, TestCase
+from django.urls import reverse
 
 from .models import Article, Category
 
@@ -98,3 +99,14 @@ class TestCategory(TestCase):
 
     def tearDown(self):
         self.category.delete()
+
+
+class TestArticleList(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+
+    def test_url_returns_http_status_code_200(self):
+        url = reverse('article-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
