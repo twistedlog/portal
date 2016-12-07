@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.db.utils import IntegrityError
 from django.test import TestCase
 
 from .models import Article, Category
@@ -54,4 +55,6 @@ class TestCategory(TestCase):
         self.assertEqual(self.category.name, 'fiction')
 
     def test_category_name_is_uique(self):
-        pass
+        with self.assertRaises(IntegrityError) as e:
+            Category.objects.create(name='fiction')
+        self.assertTrue('UNIQUE constraint failed:' in str(e.exception))

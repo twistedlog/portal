@@ -13,3 +13,7 @@ class Article(models.Model):
     author = models.CharField(max_length=100)
     publication_date = models.DateTimeField()
     body = models.TextField()
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
