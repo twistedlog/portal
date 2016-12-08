@@ -1,0 +1,10 @@
+{% verbatim %}
+<div class="list-group" ng-controller="articleListController as articleListCtlr">
+	<div class="list-group-item" ng-repeat="article in articleListCtlr.articles">
+		<h3>{{article.title}}</h3>
+		<div>
+			<blockquote>{{article.body}}</blockquote>
+		</div>
+	</div>
+</div>
+{% endverbatim %}
