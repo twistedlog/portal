@@ -1,10 +1,17 @@
 {% verbatim %}
-<div class="list-group" ng-controller="articleListController as articleListCtlr">
+<div class="" ng-controller="articleListController as articleListCtlr">
+	<div class="">
+		<img ng-src="{{articleListCtlr.articles[0].hero_image}}" style="height: 300px; width:800px;"></img>
+		<p>{{articleListCtlr.articles[0].body}}</p>
+	</div>
+
+<div class="list-group">
 	<div class="list-group-item" ng-repeat="article in articleListCtlr.articles">
 		<h3>{{article.title}}</h3>
 		<div>
 			<blockquote>{{article.body}}</blockquote>
 		</div>
 	</div>
+</div>
 </div>
 {% endverbatim %}
